@@ -6,14 +6,26 @@ public class Process {
     private int time = 0;
     private int sumTime = 0;
     private int necessaryTime = 0;
-    ArrayList<Thread> arrThread = new ArrayList<>();
+    public ArrayList<Thread> arrThread = new ArrayList<>();
     Random rand = new Random();
+
+    public Process(int pID, int time) {
+        this.pID = pID;
+        this.time = time;
+    }
+
+    public Process(){
+
+    }
+    public ArrayList<Thread> getArrThread() {
+        return arrThread;
+    }
 
     public void setNecessaryTime(int timeThread ){
         necessaryTime +=timeThread;
     }
 
-    public int getNessesaryTime(){
+    public int getNecessaryTime(){
         return necessaryTime;
     }
 
@@ -29,21 +41,38 @@ public class Process {
         return sumTime;
     }
 
-    public Process(int pID, int time) {
-        this.pID = pID;
-        this.time = time;
-    }
-
     public void createThread() {
         for (int i = 0; i < 1 + rand.nextInt( 10 ); i++) {
             int time = 1 + rand.nextInt( 5 );
-            arrThread.add( new Thread( i, time));
+            arrThread.add( new Thread(i, time));
             sumTime += time;
         }
     }
 
+    public void planProcessThread(ArrayList<Process> arrProcess) {
+        while (!arrProcess.isEmpty()) {
+            for (int i = 0; i < arrProcess.size(); i++) {
+                for (int j = 0; j < arrProcess.get( i ).arrThread.size(); j++) {
+                    int timeThr = arrProcess.get( i ).arrThread.get( j ).getTime();
+                    arrProcess.get( i ).setNecessaryTime( arrProcess.get( i ).arrThread.get( j ).getTime() );
+                    arrProcess.get( i ).arrThread.remove( j );
+                    arrProcess.get( i ).setTime( arrProcess.get( i ).getSumTime() - timeThr );
+                    sumTime -= timeThr;
+                    if (arrProcess.get( i ).getSumTime() == 0) {
+                        arrProcess.remove( i );
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
     public void start() {
         createThread();
     }
+
+    public void processDone() {
+        System.out.println("Процесс " + pID + " выполнился успешно за время " + necessaryTime);
+    }
 }
-//ядро сразу планирует потоки, а не процессы
