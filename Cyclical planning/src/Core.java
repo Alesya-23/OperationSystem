@@ -18,31 +18,22 @@ public class Core {
         }
     }
 
-    public void planProcess(){
-        while(!arrProcess.isEmpty()){
-            for(int i = 0; i < arrProcess.size(); i++){
-                for(int j = 0; j < arrProcess.get( i ).arrThread.size(); j++) {
-                            int timeThr = arrProcess.get( i ).arrThread.get( j ).getTime();
-                            System.out.println( "поток " + arrProcess.get( i ).arrThread.get( j ).getTreadID() + " процесса " + arrProcess.get( i ).getpID() + " начал выполнение" );
-                            arrProcess.get( i ).arrThread.get( j ).working();
-                            arrProcess.get( i ).setNecessaryTime(arrProcess.get( i ).arrThread.get( j ).getTime());
-                            arrProcess.get( i ).arrThread.remove( j );
-                            arrProcess.get( i ).setTime( arrProcess.get( i ).getSumTime() - timeThr );
-                            sumTime -= timeThr;
-                            if (arrProcess.get( i ).getSumTime() == 0) {
-                                System.out.println( "процесс " + arrProcess.get( i ).getpID() + " выполнен успешно за время " + arrProcess.get( i ).getNessesaryTime());
-                                System.out.println();
-                                arrProcess.remove( i );
-                                break;
-                            }
-                }
+    public void printPlanProcess() {
+        for (int i = 0; i < arrProcess.size(); i++) {
+            System.out.println("Процесс " + arrProcess.get(i).getpID());
+            int timeProcess = 0;
+            for (int j = 0; j < arrProcess.get(i).getArrThread().size(); j++) {
+                System.out.println("   Поток " + arrProcess.get(i).getArrThread().get(j).getTreadID() + " время: " + arrProcess.get(i).getArrThread().get(j).getTime());
+                timeProcess+=arrProcess.get(i).getArrThread().get(j).getTime();
             }
+            System.out.println("Итого процесс " + arrProcess.get(i).getpID() + " выполнился за время: " + timeProcess + "\n");
         }
     }
 
     public void startProgram() {
         createProcess();
-        planProcess();
+        printPlanProcess();
+        Process process = new Process();
+        process.planProcessThread(arrProcess);
     }
 }
-//указываем начало выполнение процесса, заканчиваем выполнение, только когда кончатся все объекты массива процессов
