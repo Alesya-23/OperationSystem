@@ -71,8 +71,4 @@ public class Process {
     public void start() {
         createThread();
     }
-
-    public void processDone() {
-        System.out.println("Процесс " + pID + " выполнился успешно за время " + necessaryTime);
-    }
 }
