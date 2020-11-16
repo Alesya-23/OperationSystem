@@ -6,6 +6,7 @@ import java.util.List;
 public class RandomAcsessMemory {
     private List<PagesTable> pagesTables = new LinkedList<PagesTable>();
     private List<Page> physicalTable = new LinkedList<>();
+    private List<Process> processes = new LinkedList<Process>();
     private int sizeRAM = 10;
 
     public void addTable(PagesTable pagesTable) {
@@ -14,6 +15,14 @@ public class RandomAcsessMemory {
 
     public PagesTable getTable(int index) {
         return pagesTables.get( index );
+    }
+
+    public void addProcess(Process process) {
+        processes.add( process );
+    }
+
+    public Process getProcess(int index) {
+        return processes.get( index );
     }
 
     public void fillRAMIDList() {

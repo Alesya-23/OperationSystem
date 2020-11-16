@@ -6,9 +6,8 @@ import java.util.Random;
 
 public class Process {
     Random random = new Random();
-
     private List<Page> pages = new LinkedList<Page>();
-    private int ID;
+    private static int ID;
     private int countPages = random.nextInt( 10 ) + 1;
 
     Process(int ID) {
@@ -23,9 +22,10 @@ public class Process {
         }
     }
 
-    public int getID() {
+    public static int getID() {
         return ID;
     }
+
 
     public List<Page> getPages() {
         return pages;
@@ -33,5 +33,9 @@ public class Process {
 
     public Page getPage(int index) {
         return pages.get( index );
+    }
+
+    public int getCountPages(){
+        return countPages;
     }
 }
