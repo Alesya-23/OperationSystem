@@ -1,5 +1,6 @@
 package Laba3;
 
+import java.util.List;
 import java.util.Random;
 
 public class MemoryManager {
@@ -11,9 +12,15 @@ public class MemoryManager {
         this.countProcess = countProcess;
         for (int i = 0; i < countProcess; i++) {
             Process newProcess = new Process( i );
-            storage.addProcess( newProcess );
             PagesTable pageTable = new PagesTable( newProcess );
             randomAcsessMemory.addTable( pageTable );
+            randomAcsessMemory.addProcess( newProcess );
+            List<Page> listPage = newProcess.getPages();
+
+            for(int j = 0; j < listPage.size(); j++) {
+                Page page = listPage.get( j );
+                storage.addPage( page );
+            }
         }
     }
 
@@ -21,8 +28,9 @@ public class MemoryManager {
         randomAcsessMemory.fillRAMIDList();
         Random random = new Random();
         for (int i = 0; i < count; i++) {
-            Process process = storage.getProcess( random.nextInt( countProcess ) );
-            Page page = process.getPage( random.nextInt( process.getPages().size() ) );
+            int processID = random.nextInt( countProcess );
+            Process process = randomAcsessMemory.getProcess(processID);
+            Page page = storage.getPages( random.nextInt( process.getCountPages()), processID );
             System.out.println( "ОС запрашивает у процесса " + page.getProcessID() + " страницу " + page.getID() );
             randomAcsessMemory.setInTableNRU( page );
         }
