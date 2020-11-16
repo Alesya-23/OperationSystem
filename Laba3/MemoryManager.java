@@ -34,7 +34,6 @@ public class MemoryManager {
             System.out.println( "ОС запрашивает у процесса " + page.getProcessID() + " страницу " + page.getID() );
             randomAcsessMemory.setInTableNRU( page );
         }
-
         System.out.println( "Финальные таблицы" );
         for (int i = 0; i < countProcess; i++) {
             randomAcsessMemory.getTable( i ).printTable();
