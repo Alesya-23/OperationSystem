@@ -7,7 +7,6 @@ public class RandomAcsessMemory {
     private List<PagesTable> pagesTables = new LinkedList<PagesTable>();
     private List<Page> physicalTable = new LinkedList<>();
     private List<Process> processes = new LinkedList<Process>();
-
     private int sizeRAM = 10;
 
     public void addTable(PagesTable pagesTable) {

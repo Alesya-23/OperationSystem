@@ -23,7 +23,6 @@ public class MemoryManager {
             }
         }
     }
-
     public void work(int count) {
         randomAcsessMemory.fillRAMIDList();
         Random random = new Random();
