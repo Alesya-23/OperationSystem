@@ -1,8 +1,8 @@
 import java.util.LinkedList;
 
 public class NodeFileSystem {
-    public int nodeSize;
-    public LinkedList<File> fileList;
+    private int nodeSize;
+    private LinkedList<File> fileList;
     private int nodeIndex;
     private int fileIndex;
 
