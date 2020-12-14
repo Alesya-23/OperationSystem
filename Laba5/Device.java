@@ -9,7 +9,7 @@ public class Device {
         timeExecuteOperation = rand.nextInt( 10 );
     }
 
-    public int executingOperationDevice() {
+    public int executingTimeOperationDevice() {
         System.out.println( "Операция выполнена, работа устройства ввода-вывода закончена, время выполнения :" + timeExecuteOperation );
         return timeExecuteOperation;
     }

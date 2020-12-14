@@ -37,7 +37,7 @@ public class Core {
             if (arrProcess.get( i ).getIsBlocked()) {
                 System.out.println( "Процесс " + arrProcess.get( i ).getpID() + " был заблокирован " );
                 System.out.println( "Устройство начало свою работу.Пожалуйста, дождитесь выполнения операции" );
-                arrProcess.get( i ).setNecessaryTime( device.executingOperationDevice() );
+                arrProcess.get( i ).setNecessaryTime( device.executingTimeOperationDevice() );
                 blockedProcess.add( arrProcess.get( i ) );
             } else {
                 for (int j = 0; j < arrProcess.get( i ).getArrThread().size(); j++) {
